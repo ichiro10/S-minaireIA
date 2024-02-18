@@ -1,11 +1,7 @@
 import cv2
 
-
-video_path = "C://Users//ghamm//OneDrive//Bureau//UQAC//Hiver//Séminaire//NE1.mp4"
-sequences_video_1 = [(0, 10)]  # Séquence de 10 secondes à partir de la minute 1 à la minute 1:10
-
-def extraire_sequences(video, sequences):
-    capture = cv2.VideoCapture(video_path) 
+def extraire_sequences(originPath, targetPath, video, sequences):
+    capture = cv2.VideoCapture(originPath)
     fps = capture.get(cv2.CAP_PROP_FPS)
     width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -14,10 +10,12 @@ def extraire_sequences(video, sequences):
     for index, (debut, fin) in enumerate(sequences):
         capture.set(cv2.CAP_PROP_POS_MSEC, debut*1000)  # Convertir en millisecondes
         success, image = capture.read()
-        writer = cv2.VideoWriter("sequence_{}_{}.mp4".format(video, index+1), fourcc, fps, (width, height))
+        writer = cv2.VideoWriter(targetPath + "sequence_{}_{}.mp4".format(video, index+1), 
+                                 fourcc, fps, (width, height))
         
         while capture.get(cv2.CAP_PROP_POS_MSEC) <= fin*1000:
             success, image = capture.read()
+            print(success)
             if success:
                 writer.write(image)
             else:
@@ -31,4 +29,4 @@ def extraire_sequences(video, sequences):
 
 
 
-extraire_sequences("video_1", sequences_video_1)
+#extraire_sequences("video_1", sequences_video_1)

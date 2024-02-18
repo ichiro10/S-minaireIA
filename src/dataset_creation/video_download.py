@@ -1,10 +1,11 @@
 from pytube import YouTube
 
-def Download(link):
+def Download(link, targetDir):
     youtubeObject = YouTube(link)
     youtubeObject = youtubeObject.streams.get_highest_resolution()
     try:
-        path = youtubeObject.download()
+        path = youtubeObject.download(output_path = "data\\video\\full_vids\\" 
+                                      + targetDir + "\\")
     except:
         print("An error has occurred")
     print("Download is completed successfully")

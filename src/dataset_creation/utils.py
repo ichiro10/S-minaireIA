@@ -1,3 +1,2 @@
-def min2sec(min : str):
-    seqList = min.split(":")
-    return seqList[0] * 60 + seqList[1]
+def min2sec(time):
+    return time.hour * 60 + time.minute
