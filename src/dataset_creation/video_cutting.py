@@ -15,7 +15,6 @@ def extraire_sequences(originPath, targetPath, video, sequences):
         
         while capture.get(cv2.CAP_PROP_POS_MSEC) <= fin*1000:
             success, image = capture.read()
-            print(success)
             if success:
                 writer.write(image)
             else:
