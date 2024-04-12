@@ -25,7 +25,3 @@ def extraire_sequences(originPath, targetPath, video, sequences):
         writer.release()
     
     capture.release()
-
-
-
-#extraire_sequences("video_1", sequences_video_1)

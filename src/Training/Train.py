@@ -7,12 +7,13 @@ from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
-
+import os
 # Load dataset
-data = pd.read_csv('extracted_features.csv')
+data_path = os.path.join("src", "Training", "extracted_features.csv")
+data = pd.read_csv(data_path)
 
 # Separate features and target variable
-X = data.drop('Target', axis=1)
+X = data.drop(["File", 'Target'], axis=1)
 y = data['Target']
 
 # Split dataset into training and testing sets

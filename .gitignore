@@ -1,3 +1,9 @@
 __pycache__
 ~*
 data/video/full_vids
+*.jpg
+*.mp4
+data/video/to_analyze
+data/OpenFace
+data/video
+lib

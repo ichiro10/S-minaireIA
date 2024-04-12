@@ -5,7 +5,7 @@ from video_cutting import extraire_sequences
 
 if __name__ == "__main__":
     df = pd.DataFrame(pd.read_excel("data/Dataset_preprocessing.xlsx"))
-    for i in df.index[8:]:
+    for i in df.index[18:]:
         if df["Trait"][i] == "NE":
             targetDir = "neurotic"
         else:
@@ -22,5 +22,3 @@ if __name__ == "__main__":
             secEnd = secStart + 10
             seqArray.append((secStart, secEnd))
         extraire_sequences(path, "data/video/sequences/" + targetDir + "/", "video_" + str(i), seqArray)
-
-# Vid n°6 to do
