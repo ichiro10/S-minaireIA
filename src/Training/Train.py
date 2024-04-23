@@ -13,7 +13,7 @@ data_path = os.path.join("src", "Training", "extracted_features.csv")
 data = pd.read_csv(data_path)
 
 # Separate features and target variable
-X = data.drop(["File", 'Target'], axis=1)
+X = data.drop(["File", 'Target', "gaze","gazeDiffVals","irisDiffVals"], axis=1)
 y = data['Target']
 
 # Split dataset into training and testing sets

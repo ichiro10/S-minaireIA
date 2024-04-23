@@ -33,7 +33,7 @@ if __name__ == "__main__":
     features_csv_path = os.path.join("src", "Training", "extracted_features.csv")
 
     features_file = pd.read_csv(features_csv_path)
-    gaze_col = "gaze"
+    gaze_col = "irisDiffVals"
     if gaze_col not in features_file.columns:
         features_file[gaze_col] = None
 
@@ -45,6 +45,6 @@ if __name__ == "__main__":
         currentDF = pd.read_csv(currentCSV)
         currentDF = currentDF.rename(columns=trim)
         
-        value = extractFeature(currentDF,method="meanX", colX="eye_lmk_x_28", colY="eye_lmk_y_28")
+        value = extractFeature(currentDF, colX="eye_lmk_x_28", colY="eye_lmk_y_28")
         features_file.at[index, gaze_col] = value
     features_file.to_csv(features_csv_path, index=False)

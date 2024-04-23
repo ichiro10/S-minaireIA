@@ -24,12 +24,14 @@ def boxplotFeature(df, feature_name, title, ax):
                f'Average: {np.mean(dfNE[feature_name]):.2f}, Nb outliers: {count_outliers_iqr(dfNE[feature_name])}', 
                f'Average: {np.mean(dfES[feature_name]):.2f}, Nb outliers: {count_outliers_iqr(dfES[feature_name])}'])
 if __name__ == "__main__":
-    df = pd.read_csv("src/Training/extracted_features1.csv")
+    df = pd.read_csv("src/Training/extracted_features.csv")
     fig, ax = plt.subplots(ncols=2,nrows=2)
-    boxplotFeature(df, "Head_nods", "Boxplot for head nodes", ax[0,0])
-    boxplotFeature(df, "Head_rotations", "Boxplot for head rotations", ax[0,1])
-    boxplotFeature(df, "Magnitude", "Boxplot for Magnitude", ax[1,0])
-    boxplotFeature(df, "Temporal_dynamic", "Boxplot for temporal dynamic", ax[1,1])
+    boxplotFeature(df, "gaze", "Boxplot for gaze direction (mean position)", 
+                   ax[0, 0])
+    boxplotFeature(df, "gazeDiffVals", "Boxplot for gaze direction (number of different values)", ax[0, 1])
+    boxplotFeature(df, "irisMean", "Boxplot for iris position (mean position)", 
+                   ax[1, 0])
+    boxplotFeature(df, "irisDiffVals", "Boxplot for iris position (number of different values)", ax[1, 1])
     dfFeatures = df[["Head_nods", "Head_rotations",
                      "Magnitude", "Temporal_dynamic"]]
     covMatrix = dfFeatures.cov()
