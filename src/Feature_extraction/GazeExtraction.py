@@ -51,14 +51,18 @@ def cropImage(vid_number, img):
     img = img[y:y+height, x:x+width]
     return img
 
+# Program that uses OpenFace to extract the gaze features from the videos 
+# specified in the extracted_features.csv
 if __name__ == '__main__':
     projectPath = os.path.abspath(".")
-    csvPath = os.path.join(projectPath,"src/Training/extracted_features1.csv")
+    csvPath = os.path.join(projectPath,"src/Training/extracted_features.csv")
     videoFolderPath = os.path.join(projectPath,"data/video/sequences")
     openFaceFolderPath = os.path.join(projectPath,"data/OpenFace")
     features = pd.read_csv(csvPath)
     
     os.chdir("lib/OpenFace")
+    # For each video in the extracted_features.csv file, we extract the features
+    # if it hasn't been done before
     for index, row in features.iterrows():
         vidName = row["File"]
         target = "neurotic" if row["Target"] == "NE" else "confident"
@@ -94,9 +98,7 @@ if __name__ == '__main__':
                         mainDF : pd.DataFrame = pd.concat(listDF)
                         mainDF.to_csv(outputDirPath + ".csv", index=False)
 
-            # Release everything:
             capture.release()
-            #out.release()
             cv2.destroyAllWindows()
             if len(listDF) > 0:
                 mainDF : pd.DataFrame = pd.concat(listDF)

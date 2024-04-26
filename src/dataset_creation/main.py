@@ -3,9 +3,11 @@ from video_download import Download
 from utils import min2sec
 from video_cutting import extraire_sequences
 
+# Program that downloads the videos in the "data/Dataset_preprocessing.xlsx" 
+# file and creates the sequences.
 if __name__ == "__main__":
     df = pd.DataFrame(pd.read_excel("data/Dataset_preprocessing.xlsx"))
-    for i in df.index[18:]:
+    for i in df.index:
         if df["Trait"][i] == "NE":
             targetDir = "neurotic"
         else:

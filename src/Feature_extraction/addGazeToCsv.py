@@ -4,6 +4,12 @@ import numpy as np
 def trim(colname):
     return colname.strip()
 
+# Extracts a feature from a sequence. We have used the tuples ("gaze_angle_x", 
+# "gaze_angle_y") and ("eye_lmk_x_28", "eye_lmk_y_28") for the features. 
+# The first tuple analyzes the gaze direction and the other the iris position.
+# The method argument can be "meanSum": to do the mean of colX and colY and 
+# sum the two, or meanX to only keep the mean of colX, or meanY for colY. If 
+# it's anything else, it counts the proportion of different values in the cols.
 def extractFeature(df: pd.DataFrame, colX = "gaze_angle_x", 
                    colY = "gaze_angle_y", method:str="gazeValueCount"):
     df = df[df["confidence"] > 0.2]
@@ -27,13 +33,15 @@ def extractFeature(df: pd.DataFrame, colX = "gaze_angle_x",
         return 0
 
 
-
+# Program used to add the a gaze to the extracted_features csv
+# In this case, the column added is irisDiffVals which counts the
+# number of different values observed for the iris position.
 if __name__ == "__main__":
     openFace_folder = os.path.join("data", "OpenFace")
     features_csv_path = os.path.join("src", "Training", "extracted_features.csv")
 
     features_file = pd.read_csv(features_csv_path)
-    gaze_col = "irisDiffVals"
+    gaze_col = "irisDiffVals" # Name of the feature in the csv
     if gaze_col not in features_file.columns:
         features_file[gaze_col] = None
 

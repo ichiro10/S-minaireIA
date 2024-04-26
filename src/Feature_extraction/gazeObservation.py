@@ -1,3 +1,5 @@
+# Fichier utilisé pour faire l'analyse des résultats obtenu après avoir extrait
+# les caractéristiques du visage
 import pandas as pd
 from matplotlib import pyplot as plt
 def trim(colname):
@@ -12,11 +14,11 @@ def count_outliers(column):
     outliers = (column < lower_bound) | (column > upper_bound)
     return outliers.sum()
 
-df1 = pd.read_csv("data/OpenFace/sequence_video_4_2.csv")
+df1 = pd.read_csv("data/OpenFace/neurotic/sequence_video_0_2.csv")
 df1 = df1.rename(columns=trim)
-df2 = pd.read_csv("data/OpenFace/sequence_video_4_3.csv")
+df2 = pd.read_csv("data/OpenFace/neurotic/sequence_video_5_13.csv")
 df2 = df2.rename(columns=trim)
-df3 = pd.read_csv("data/OpenFace/sequence_video_1_1.csv")
+df3 = pd.read_csv("data/OpenFace/neurotic/sequence_video_17_10.csv")
 df3 = df3.rename(columns=trim)
 print(f"Diff max-min df1 : {df1[['gaze_angle_x', 'gaze_angle_y']].max()}")
 print(f"Diff max-min df2 : {df2[['gaze_angle_x', 'gaze_angle_y']].max()}")
@@ -27,7 +29,6 @@ print(f"Nb outliers x (df2): {count_outliers(df2['gaze_angle_x'])}")
 print(f"Nb outliers y (df2): {count_outliers(df2['gaze_angle_y'])}")
 print(f"Nb outliers x (df3): {count_outliers(df3['gaze_angle_x'])}")
 print(f"Nb outliers y (df3): {count_outliers(df3['gaze_angle_y'])}")
-#df[' gaze_angle_y'] = df[' gaze_angle_y'].apply(lambda x: round(x, 2))
 fig, ax = plt.subplots(ncols=1,nrows=2)
 ax[0].boxplot(df1['gaze_angle_x'], positions=[1], patch_artist=True)
 ax[0].boxplot(df2['gaze_angle_x'], positions=[2], patch_artist=True)

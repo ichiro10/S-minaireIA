@@ -1,5 +1,6 @@
 from pytube import YouTube
 
+# Downloads the youtube video specified in the link into the targetDir
 def Download(link, targetDir):
     youtubeObject = YouTube(link)
     youtubeObject = youtubeObject.streams.get_highest_resolution()
